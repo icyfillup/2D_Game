@@ -3,10 +3,8 @@ package WorldObj;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class groundObj
+public class groundObj extends Object
 {
-	private int x;
-	private int y;
 	private int width;
 	private int height;
 	
@@ -18,20 +16,12 @@ public class groundObj
 		this.height = height;
 	}
 	
-	public int getX()
-	{
-		return x;
-	}
-	
-	public int getY()
-	{
-		return y;
-	}
-	
 	public void draw(Graphics g)
 	{
 		g.setColor(Color.GREEN);
 		g.drawRect(x, y, width, height);
 		g.fillRect(x, y, width, height);
 	}
+	
+	
 }
