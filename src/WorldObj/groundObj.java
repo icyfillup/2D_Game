@@ -31,7 +31,7 @@ public class groundObj
 	public void draw(Graphics g)
 	{
 		g.setColor(Color.GREEN);
-//		g.drawRect(x, y, width, height);
+		g.drawRect(x, y, width, height);
 		g.fillRect(x, y, width, height);
 	}
 }
