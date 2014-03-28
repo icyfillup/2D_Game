@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class PlayerObj extends Object implements ActionListener
@@ -16,9 +13,6 @@ public class PlayerObj extends Object implements ActionListener
 	private final int speed = 2;
 	private int xVel = 0;
 	private int yVel = 0;
-	
-	private int width;
-	private int height;
 	
 	private Timer movementTimer;
 	
@@ -34,6 +28,7 @@ public class PlayerObj extends Object implements ActionListener
 		this.width = width;
 		this.height = height;
 		this.movementTimer = new Timer(refreshRate/FPS, this);
+		Box = new CollisionBox(x, y, width, height);
 		
 		this.isUp = false;
 		this.isDown = false;
@@ -45,10 +40,10 @@ public class PlayerObj extends Object implements ActionListener
 	
 	public void draw(Graphics g)
 	{
-		
 		g.setColor(Color.RED);
 		g.drawOval(x, y, width, height);
 		g.fillOval(x, y, width, height);
+		Box.draw(g);
 	}
 
 /**************************Thread*********************************************/	
@@ -70,6 +65,16 @@ public class PlayerObj extends Object implements ActionListener
 
 /**************************Movement********************************************/
 	
+	private void movement()
+	{
+		moveUp();
+		moveRight();
+		moveLeft();
+		moveDown();
+		stay();
+		CollisionBox();
+	}
+
 	private void moveUp() { if(isUp) yVel = -speed;}
 	
 	private void moveDown() { if(isDown) yVel = speed;}
@@ -96,15 +101,12 @@ public class PlayerObj extends Object implements ActionListener
 		y += yVel;
 	}
 
-	private void movement()
+/****************************CollsionBox Related Methods***********************/	
+	
+	private void CollisionBox() 
 	{
-		moveUp();
-		moveRight();
-		moveLeft();
-		moveDown();
-		stay();
+		Box.setCoordinate(x, y);
 	}
-
 	
-	
+/******************************************************************************/	
 }

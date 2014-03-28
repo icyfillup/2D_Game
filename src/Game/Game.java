@@ -17,7 +17,6 @@ public class Game extends JFrame implements BoardSettings
 		setSize(B_WIDTH, B_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setupWindow();
-		
 	}
 	
 	private void setupWindow()

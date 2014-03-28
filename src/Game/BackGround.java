@@ -99,6 +99,8 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 /************************Setter Methods**************************************/	
 	
 	
+/************************Collision Detection*********************************/	
+	
 	
 	
 /************************Classes*********************************************/
@@ -114,7 +116,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		
 	}
 	
-/*************************Thread**********************************************/	
+/*************************Thread*********************************************/	
 	
 	@Override
 	public void run()
