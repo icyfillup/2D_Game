@@ -22,7 +22,6 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	private ArrayList<groundObj> platform;
 	private PlayerObj player;
 	private Timer RefreshTimer;
-	private boolean running;
 	
 /************************Constructor*****************************************/	
 	
@@ -46,15 +45,9 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		initTimer();
 	}
 
-	private void initTimer()
-	{
-		RefreshTimer = new Timer(refreshRate/FPS, new RefreshRate());
-	}
+	private void initTimer() { RefreshTimer = new Timer(refreshRate/FPS, new RefreshRate()); }
 
-	private void initPlayer()
-	{
-		player = new PlayerObj(0, 0, GRID_SIZE, GRID_SIZE);
-	}
+	private void initPlayer() { player = new PlayerObj(0, 0, GRID_SIZE, GRID_SIZE); }
 
 	private void initGround()
 	{
@@ -105,7 +98,8 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 
 /************************Setter Methods**************************************/	
 	
-	public void setRunning(boolean isRunning) { running = isRunning; }
+	
+	
 	
 /************************Classes*********************************************/
 	
@@ -132,12 +126,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	private void startPlayer()
 	{
 //		System.out.println(running);
-		if(running)
-		{
-			player.setRunning(true);
-			player.start();
-		}
-		
+		player.start();
 	}
 
 	private void startRefreshTimer() { RefreshTimer.start(); }
@@ -178,7 +167,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		
 		if(isRight) { player.isRight(isRight); }
 		
-		System.out.println("1. " + (char) key);
+//		System.out.println("1. " + (char) key);
 		e.consume();
 	}
 
@@ -200,7 +189,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		
 		if(isRight) { player.isRight(!isRight); }
 		
-		System.out.println("2. " + (char) key);
+//		System.out.println("2. " + (char) key);
 		e.consume();
 	}
 	

@@ -21,7 +21,6 @@ public class PlayerObj extends Object implements ActionListener
 	private int height;
 	
 	private Timer movementTimer;
-	private boolean running;
 	
 	private boolean isUp;
 	private boolean isDown;
@@ -46,6 +45,7 @@ public class PlayerObj extends Object implements ActionListener
 	
 	public void draw(Graphics g)
 	{
+		
 		g.setColor(Color.RED);
 		g.drawOval(x, y, width, height);
 		g.fillOval(x, y, width, height);
@@ -60,41 +60,29 @@ public class PlayerObj extends Object implements ActionListener
 	
 /************************Setter Methods**************************************/	
 	
-	public void setRunning(boolean isRunning) { running = isRunning; }
+	public void isUp(boolean isUp) { this.isUp = isUp; }
 	
-	public void isUp(boolean isUp)
-	{ 
-		this.isUp = isUp;
-		moveUp();
-	}
+	public void isDown(boolean isDown) { this.isDown = isDown; }
 	
-	public void isDown(boolean isDown)
-	{ 
-		this.isDown = isDown;
-		moveDown();
-	}
+	public void isLeft(boolean isLeft) { this.isLeft = isLeft; }
 	
-	public void isLeft(boolean isLeft) 
-	{
-		this.isLeft = isLeft; 
-		moveLeft();
-	}
-	
-	public void isRight(boolean isRight) 
-	{ 
-		this.isRight = isRight; 
-		moveRight();
-	}
+	public void isRight(boolean isRight) { this.isRight = isRight; }
 
 /**************************Movement********************************************/
 	
-	private void moveUp() { if(isUp) yVel = -speed; else yVel = 0;}
+	private void moveUp() { if(isUp) yVel = -speed;}
 	
-	private void moveDown() { if(isDown) yVel = speed; else yVel = 0;}
+	private void moveDown() { if(isDown) yVel = speed;}
 	
-	private void moveLeft() { if(isLeft) xVel = -speed; else xVel = 0;}
+	private void moveLeft() { if(isLeft) xVel = -speed;}
 	
-	private void moveRight() { if(isRight) xVel = speed; else xVel = 0;}
+	private void moveRight() { if(isRight) xVel = speed;}
+	
+	private void stay()
+	{
+		if(!isUp && !isDown) stay_Vert();
+		if(!isLeft && !isRight) stay_Hori();
+	}
 	
 	private void stay_Vert() { yVel = 0; }
 	
@@ -103,8 +91,20 @@ public class PlayerObj extends Object implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		movement();
 		x += xVel;
 		y += yVel;
 	}
+
+	private void movement()
+	{
+		moveUp();
+		moveRight();
+		moveLeft();
+		moveDown();
+		stay();
+	}
+
+	
 	
 }
