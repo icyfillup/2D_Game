@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
@@ -13,13 +15,14 @@ import javax.swing.JPanel;
 import WorldObj.PlayerObj;
 import WorldObj.groundObj;
 
-public class BackGround extends JPanel implements BoardSettings, Runnable
+public class BackGround extends JPanel implements BoardSettings, Runnable, KeyListener
 {
 /************************Variables*******************************************/	
 	
 	private ArrayList<groundObj> platform;
 	private PlayerObj player;
 	private Timer RefreshTimer;
+	private boolean running;
 	
 /************************Constructor*****************************************/	
 	
@@ -45,7 +48,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable
 
 	private void initTimer()
 	{
-		RefreshTimer = new Timer(100, new RefreshRate());
+		RefreshTimer = new Timer(refreshRate/FPS, new RefreshRate());
 	}
 
 	private void initPlayer()
@@ -100,6 +103,10 @@ public class BackGround extends JPanel implements BoardSettings, Runnable
 	
 	public PlayerObj getPlayer() { return player; }
 
+/************************Setter Methods**************************************/	
+	
+	public void setRunning(boolean isRunning) { running = isRunning; }
+	
 /************************Classes*********************************************/
 	
 	class RefreshRate implements ActionListener
@@ -124,12 +131,77 @@ public class BackGround extends JPanel implements BoardSettings, Runnable
 
 	private void startPlayer()
 	{
-		player.start();
+//		System.out.println(running);
+		if(running)
+		{
+			player.setRunning(true);
+			player.start();
+		}
+		
 	}
 
-	private void startRefreshTimer()
+	private void startRefreshTimer() { RefreshTimer.start(); }
+	
+	public void addNotify()
+	{		
+		super.addNotify();
+		addKeyListener(this);
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false);
+		System.out.print("AddNotifyExecuted!");	
+	}
+
+/*************************Listener*****************************************/	
+	
+	@Override
+	public void keyTyped(KeyEvent e)
 	{
-		RefreshTimer.start();
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		int key = e.getKeyCode();
+		
+		boolean isUp = (key == KeyEvent.VK_W);
+		boolean isDown = (key == KeyEvent.VK_S);
+		boolean isLeft = (key == KeyEvent.VK_A);
+		boolean isRight = (key == KeyEvent.VK_D);
+		
+		
+		if(isUp) { player.isUp(isUp); }
+		
+		if(isDown) { player.isDown(isDown); }
+		
+		if(isLeft) { player.isLeft(isLeft); }
+		
+		if(isRight) { player.isRight(isRight); }
+		
+		System.out.println("1. " + (char) key);
+		e.consume();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		int key = e.getKeyCode();
+		
+		boolean isUp = (key == KeyEvent.VK_W);
+		boolean isDown = (key == KeyEvent.VK_S);
+		boolean isLeft = (key == KeyEvent.VK_A);
+		boolean isRight = (key == KeyEvent.VK_D);
+		
+		if(isUp) { player.isUp(!isUp); }
+		
+		if(isDown) { player.isDown(!isDown); }
+		
+		if(isLeft) { player.isLeft(!isLeft); }
+		
+		if(isRight) { player.isRight(!isRight); }
+		
+		System.out.println("2. " + (char) key);
+		e.consume();
 	}
 	
 }

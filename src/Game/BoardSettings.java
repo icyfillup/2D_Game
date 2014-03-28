@@ -8,4 +8,6 @@ public interface BoardSettings
 	int B_ROW = 25;
 	int B_COL = 32;
 	
+	int refreshRate = 1000;
+	int FPS = 60;
 }

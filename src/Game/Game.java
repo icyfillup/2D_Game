@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class Game extends JFrame implements BoardSettings
 {
 	private BackGround board;
-	JPanel buttonWindow;
+	private JPanel buttonWindow;
 	
 	public Game(String name)
 	{
@@ -47,6 +47,7 @@ public class Game extends JFrame implements BoardSettings
 	public static void main(String[] args)
 	{
 		Game game = new Game("2D Game");
+		game.board.setRunning(true);
 		game.board.run();
 	}
 

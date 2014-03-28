@@ -2,7 +2,9 @@ package WorldObj;
 
 import java.awt.Graphics;
 
-public abstract class Object extends Thread
+import Game.BoardSettings;
+
+public abstract class Object extends Thread implements BoardSettings
 {
 	protected int x;
 	protected int y;
