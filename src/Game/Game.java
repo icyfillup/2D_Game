@@ -28,10 +28,10 @@ public class Game extends JFrame implements BoardSettings
 //		setupButton();
 //		add(buttonWindow, BorderLayout.SOUTH);
 		
+		board.run();
 		setLocationRelativeTo(null);
 		setResizable(true);
 		setVisible(true);
-		
 	}
 
 	private void setupButton()
@@ -46,7 +46,6 @@ public class Game extends JFrame implements BoardSettings
 	public static void main(String[] args)
 	{
 		Game game = new Game("2D Game");
-		game.board.run();
 	}
 
 }

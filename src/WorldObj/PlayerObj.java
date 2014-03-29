@@ -3,12 +3,10 @@ package WorldObj;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.Timer;
-
 public class PlayerObj extends Object
 {
 	
-	private final int speed = 2;
+	private final int speed = 3;
 	private int xVel = 0;
 	private int yVel = 0;
 	
@@ -19,13 +17,20 @@ public class PlayerObj extends Object
 	
 	public PlayerObj(int x, int y, int width, int height) 
 	{
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.UpdateLoop = new Timer(refreshRate/FPS, this);
-		C_Box = new CollisionBox(x, y, width, height);
+		super(x, y, width, height);
 		
+		init();
+	}
+	
+/**************************Initiate Methods**********************************/	
+
+	private void init()
+	{
+		initMovement();
+	}
+	
+	private void initMovement() 
+	{
 		this.isUp = false;
 		this.isDown = false;
 		this.isLeft = false;
@@ -39,15 +44,13 @@ public class PlayerObj extends Object
 		g.setColor(Color.RED);
 		g.drawOval(x, y, width, height);
 		g.fillOval(x, y, width, height);
+		
 		C_Box.draw(g);
 	}
 
 /**************************Thread*********************************************/	
 	
-	public void run() 
-	{
-		UpdateLoop.start();
-	}
+	public void run() { UpdateLoop.start(); }
 	
 	public void update() 
 	{
@@ -101,7 +104,7 @@ public class PlayerObj extends Object
 	
 	private void stay_Hori() { xVel = 0; }
 
-/****************************CollsionBox Related Methods***********************/	
+/****************************CollsionBox Related Methods***********************/
 	
 //	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	

@@ -107,13 +107,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	
 	class RefreshRate implements ActionListener
 	{
-
-		public void actionPerformed(ActionEvent e)
-		{
-//			System.out.println("Drawing");
-			repaint();
-		}
-		
+		public void actionPerformed(ActionEvent e) { repaint(); }	
 	}
 	
 /*************************Thread*********************************************/	
