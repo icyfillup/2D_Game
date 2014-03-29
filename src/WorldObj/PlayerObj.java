@@ -3,8 +3,11 @@ package WorldObj;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Game.BackGround;
+
 public class PlayerObj extends Object
 {
+/************************Variables*******************************************/
 	
 	private final int speed = 3;
 	private int xVel = 0;
@@ -15,10 +18,11 @@ public class PlayerObj extends Object
 	private boolean isLeft;
 	private boolean isRight;
 	
-	public PlayerObj(int x, int y, int width, int height) 
+/************************Constructor*****************************************/
+	
+	public PlayerObj(int x, int y, int width, int height, BackGround backGround) 
 	{
-		super(x, y, width, height);
-		
+		super(x, y, width, height, backGround);
 		init();
 	}
 	
@@ -56,8 +60,9 @@ public class PlayerObj extends Object
 	{
 		movement();	
 		changeInSpeed();
+		detectingCollision();
 	}
-	
+
 /************************Setter Methods**************************************/	
 	
 	public void isUp(boolean isUp) { this.isUp = isUp; }
@@ -104,7 +109,22 @@ public class PlayerObj extends Object
 	
 	private void stay_Hori() { xVel = 0; }
 
-/****************************CollsionBox Related Methods***********************/
+/****************************Collision Detection Related Methods***********************/
+	
+	private boolean isC_BoxDetected()
+	{ 
+		for(groundObj Obj: getPlatform())
+		{
+			if(CollisionBox.collide(this.getC_Box(), Obj.getC_Box()))
+				return true;
+		}
+		return false;
+	}
+	
+	private void detectingCollision()
+	{
+		if(isC_BoxDetected()) System.out.println("Detected");
+	}
 	
 //	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	

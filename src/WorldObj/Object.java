@@ -3,26 +3,34 @@ package WorldObj;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Timer;
 
+import Game.BackGround;
 import Game.BoardSettings;
 
 public abstract class Object extends Thread implements BoardSettings, ActionListener
 {
+/************************Variables*******************************************/
+	
 	protected Timer UpdateLoop;
 	protected int x;
 	protected int y;
 	protected int width;
 	protected int height;
 	protected CollisionBox C_Box;
+	protected BackGround backGround;
 	
-	public Object(int x, int y, int width, int height)
+/************************Constructor*****************************************/
+	
+	public Object(int x, int y, int width, int height, BackGround backGround)
 	{
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.backGround = backGround;
 		
 		init();
 	}
@@ -45,13 +53,18 @@ public abstract class Object extends Thread implements BoardSettings, ActionList
 	
 	public int getY() { return y; }
 	
+	public ArrayList<groundObj> getPlatform()
+	{ 
+		return backGround.getPlatform();
+	}
+	
 /**************************Paint and Draw Methods***************************/
 	
 	public abstract void draw(Graphics g);
 	
 /****************************CollsionBox Related Methods********************/
 
-	public CollisionBox getCollisionBox() { return C_Box; }
+	public CollisionBox getC_Box() { return C_Box; }
 	
 	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	

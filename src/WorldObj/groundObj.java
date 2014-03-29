@@ -3,10 +3,13 @@ package WorldObj;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Game.BackGround;
+
 public class groundObj extends Object
 {
 	
-	public groundObj(int x, int y, int width, int height) { super(x, y, width, height); }
+	public groundObj(int x, int y, int width, int height, BackGround backGround)
+	{ super(x, y, width, height, backGround); }
 	
 	public void draw(Graphics g)
 	{

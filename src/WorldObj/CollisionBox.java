@@ -10,7 +10,7 @@ public class CollisionBox
 	private int y;
 	private int width;
 	private int height;
-	Rectangle R_Box;
+	private Rectangle R_Box;
 	
 	public CollisionBox(int x, int y, int width, int height)
 	{
@@ -28,7 +28,7 @@ public class CollisionBox
 		R_Box.setLocation(this.x, this.y);
 	}
 
-	public Rectangle getCollisionBox()
+	public Rectangle getR_Box()
 	{
 		R_Box.setLocation(this.x, this.y);
 		return R_Box;
@@ -39,6 +39,15 @@ public class CollisionBox
 		g.setColor(Color.GRAY);
 		g.drawRect(x, y, width, height);
 		g.fillRect(x, y, width, height);
+	}
+
+	
+	public static boolean collide(CollisionBox thisC_Box, CollisionBox thatC_Box) 
+	{ 
+		if(thisC_Box.getR_Box().intersects(thatC_Box.getR_Box()))
+			return true; 
+		else 
+			return false;
 	}
 
 /*********************************************************************************/	

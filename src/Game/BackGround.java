@@ -23,15 +23,10 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	private PlayerObj player;
 	private Timer RefreshTimer;
 	
-/************************Constructor*****************************************/	
+/************************Constructor*****************************************/
 	
 	public BackGround()
 	{
-		setPreferredSize(new Dimension(B_WIDTH,B_HEIGHT));
-		setFocusable(true);
-		requestFocus(true);
-
-//		System.out.println(getSize().height);
 		init();
 		repaint();
 	}
@@ -40,19 +35,27 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	
 	private void init()
 	{
+		initWindowSetting();
 		initGround();
 		initPlayer();
 		initTimer();
 	}
 
+	private void initWindowSetting() 
+	{
+		setPreferredSize(new Dimension(B_WIDTH,B_HEIGHT));
+		setFocusable(true);
+		requestFocus(true);
+	}
+
 	private void initTimer() { RefreshTimer = new Timer(refreshRate/FPS, new RefreshRate()); }
 
-	private void initPlayer() { player = new PlayerObj(0, 0, GRID_SIZE, GRID_SIZE); }
+	private void initPlayer() { player = new PlayerObj(0, 0, GRID_SIZE, GRID_SIZE, this); }
 
 	private void initGround()
 	{
 		platform = new ArrayList<groundObj>();
-		platform.add(new groundObj(0, GRID_SIZE * (B_ROW - 2), GRID_SIZE * 5, GRID_SIZE));
+		platform.add(new groundObj(0, GRID_SIZE * (B_ROW - 2), GRID_SIZE * 5, GRID_SIZE, this));
 	}
 
 /************************Paint and Draw Methods******************************/	
