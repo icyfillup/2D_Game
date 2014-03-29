@@ -2,19 +2,15 @@ package WorldObj;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class PlayerObj extends Object implements ActionListener
+public class PlayerObj extends Object
 {
 	
 	private final int speed = 2;
 	private int xVel = 0;
 	private int yVel = 0;
-	
-	private Timer movementTimer;
 	
 	private boolean isUp;
 	private boolean isDown;
@@ -27,8 +23,8 @@ public class PlayerObj extends Object implements ActionListener
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.movementTimer = new Timer(refreshRate/FPS, this);
-		Box = new CollisionBox(x, y, width, height);
+		this.UpdateLoop = new Timer(refreshRate/FPS, this);
+		C_Box = new CollisionBox(x, y, width, height);
 		
 		this.isUp = false;
 		this.isDown = false;
@@ -43,14 +39,20 @@ public class PlayerObj extends Object implements ActionListener
 		g.setColor(Color.RED);
 		g.drawOval(x, y, width, height);
 		g.fillOval(x, y, width, height);
-		Box.draw(g);
+		C_Box.draw(g);
 	}
 
 /**************************Thread*********************************************/	
 	
 	public void run() 
 	{
-		movementTimer.start();
+		UpdateLoop.start();
+	}
+	
+	public void update() 
+	{
+		movement();	
+		changeInSpeed();
 	}
 	
 /************************Setter Methods**************************************/	
@@ -65,6 +67,12 @@ public class PlayerObj extends Object implements ActionListener
 
 /**************************Movement********************************************/
 	
+	private void changeInSpeed()
+	{
+		x += xVel;
+		y += yVel;
+	}
+	
 	private void movement()
 	{
 		moveUp();
@@ -72,7 +80,7 @@ public class PlayerObj extends Object implements ActionListener
 		moveLeft();
 		moveDown();
 		stay();
-		CollisionBox();
+//		setCollisionBox();
 	}
 
 	private void moveUp() { if(isUp) yVel = -speed;}
@@ -93,20 +101,9 @@ public class PlayerObj extends Object implements ActionListener
 	
 	private void stay_Hori() { xVel = 0; }
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		movement();
-		x += xVel;
-		y += yVel;
-	}
-
 /****************************CollsionBox Related Methods***********************/	
 	
-	private void CollisionBox() 
-	{
-		Box.setCoordinate(x, y);
-	}
+//	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	
 /******************************************************************************/	
 }

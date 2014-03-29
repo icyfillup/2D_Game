@@ -12,7 +12,7 @@ public class groundObj extends Object
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		Box = new CollisionBox(x, y, width, height);
+		C_Box = new CollisionBox(x, y, width, height);
 	}
 	
 	public void draw(Graphics g)
@@ -20,9 +20,15 @@ public class groundObj extends Object
 		g.setColor(Color.GREEN);
 		g.drawRect(x, y, width, height);
 		g.fillRect(x, y, width, height);
-		Box.draw(g);
+		C_Box.draw(g);
 	}
-	
+
+	@Override
+	public void update()
+	{
+		// TODO Auto-generated method stub	
+	}
+
 /******************************************************************************/	
 	
 	

@@ -10,11 +10,11 @@ public class CollisionBox
 	private int y;
 	private int width;
 	private int height;
-	Rectangle Box;
+	Rectangle R_Box;
 	
 	public CollisionBox(int x, int y, int width, int height)
 	{
-		Box = new Rectangle(x, y, width, height);
+		R_Box = new Rectangle(x, y, width, height);
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -25,13 +25,13 @@ public class CollisionBox
 	{
 		this.x = x;
 		this.y = y;
-		Box.setLocation(this.x, this.y);
+		R_Box.setLocation(this.x, this.y);
 	}
 
 	public Rectangle getCollisionBox()
 	{
-		Box.setLocation(this.x, this.y);
-		return Box;
+		R_Box.setLocation(this.x, this.y);
+		return R_Box;
 	}
 	
 	public void draw(Graphics g)
