@@ -2,6 +2,7 @@ package WorldObj;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import Game.BackGround;
 
@@ -18,6 +19,8 @@ public class PlayerObj extends Object
 	private boolean isLeft;
 	private boolean isRight;
 	
+	private ArrayList<Object> collidingObj;
+	
 /************************Constructor*****************************************/
 	
 	public PlayerObj(int x, int y, int width, int height, BackGround backGround) 
@@ -30,9 +33,12 @@ public class PlayerObj extends Object
 
 	private void init()
 	{
+		initCollidingObj();
 		initMovement();
 	}
 	
+	private void initCollidingObj() { collidingObj = new ArrayList<Object>(); }
+
 	private void initMovement() 
 	{
 		this.isUp = false;
@@ -91,13 +97,13 @@ public class PlayerObj extends Object
 //		setCollisionBox();
 	}
 
-	private void moveUp() { if(isUp) yVel = -speed;}
+	private void moveUp() { if(isUp) yVel = -speed; }
 	
-	private void moveDown() { if(isDown) yVel = speed;}
+	private void moveDown() { if(isDown) yVel = speed; }
 	
-	private void moveLeft() { if(isLeft) xVel = -speed;}
+	private void moveLeft() { if(isLeft) xVel = -speed; }
 	
-	private void moveRight() { if(isRight) xVel = speed;}
+	private void moveRight() { if(isRight) xVel = speed; }
 	
 	private void stay()
 	{
@@ -111,22 +117,25 @@ public class PlayerObj extends Object
 
 /****************************Collision Detection Related Methods***********************/
 	
-	private boolean isC_BoxDetected()
-	{ 
-		for(groundObj Obj: getPlatform())
-		{
-			if(CollisionBox.collide(this.getC_Box(), Obj.getC_Box()))
-				return true;
-		}
-		return false;
+	private void C_BoxDetecting()
+	{
+		collidingObj.clear();
+		for(groundObj Obj: getPlatform()) { if(this.collide(Obj)) collidingObj.add(Obj); }
 	}
 	
 	private void detectingCollision()
 	{
-		if(isC_BoxDetected()) System.out.println("Detected");
+		C_BoxDetecting();
+		if(!collidingObj.isEmpty()) { collisionDetected(); }
+	}
+
+	private void collisionDetected()
+	{
+		
 	}
 	
 //	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	
-/******************************************************************************/	
+/******************************************************************************/
+	
 }

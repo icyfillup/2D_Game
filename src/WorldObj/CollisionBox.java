@@ -41,16 +41,14 @@ public class CollisionBox
 		g.fillRect(x, y, width, height);
 	}
 
-	
-	public static boolean collide(CollisionBox thisC_Box, CollisionBox thatC_Box) 
+	public boolean isColliding(CollisionBox thatC_Box) 
 	{ 
-		if(thisC_Box.getR_Box().intersects(thatC_Box.getR_Box()))
+		if(this.getR_Box().intersects(thatC_Box.getR_Box()))
 			return true; 
 		else 
 			return false;
 	}
-
-/*********************************************************************************/	
 	
+/*********************************************************************************/	
 	
 }

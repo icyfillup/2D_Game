@@ -53,10 +53,7 @@ public abstract class Object extends Thread implements BoardSettings, ActionList
 	
 	public int getY() { return y; }
 	
-	public ArrayList<groundObj> getPlatform()
-	{ 
-		return backGround.getPlatform();
-	}
+	public ArrayList<groundObj> getPlatform() { return backGround.getPlatform(); }
 	
 /**************************Paint and Draw Methods***************************/
 	
@@ -67,6 +64,14 @@ public abstract class Object extends Thread implements BoardSettings, ActionList
 	public CollisionBox getC_Box() { return C_Box; }
 	
 	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
+	
+	public boolean collide(Object checking) 
+	{ 
+		if(this.getC_Box().isColliding(checking.getC_Box()))
+			return true; 
+		else 
+			return false;
+	}
 	
 /****************************Thread*****************************************/
 	
@@ -80,5 +85,6 @@ public abstract class Object extends Thread implements BoardSettings, ActionList
 		setCollisionBox();
 	}
 	
-/***************************************************************************/	
+/***************************************************************************/
+	
 }
