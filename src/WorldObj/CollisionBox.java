@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 public class CollisionBox 
 {
-	private int disFromOrigin = 4;
+	private int disFromOrigin = 2;
 	private int x;
 	private int y;
 	private int width;
@@ -38,7 +38,7 @@ public class CollisionBox
 	public void draw(Graphics g)
 	{
 		g.setColor(Color.GRAY);
-		g.drawRect(R_Box.x, R_Box.y, R_Box.width, R_Box.height);
+//		g.drawRect(R_Box.x, R_Box.y, R_Box.width, R_Box.height);
 	}
 
 	public boolean isCollidingWith(CollisionBox thatC_Box) { return this.getR_Box().intersects(thatC_Box.getR_Box()); }

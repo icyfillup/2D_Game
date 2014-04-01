@@ -14,10 +14,20 @@ public class PlayerObj extends Object
 	private int xVel = 0;
 	private int yVel = 0;
 	
+	private int Left_xVel = 0;
+	private int Right_xVel = 0;
+	private int Up_yVel = 0;
+	private int Down_yVel = 0;
+	
 	private boolean isUp;
 	private boolean isDown;
 	private boolean isLeft;
 	private boolean isRight;
+	
+	private boolean collidedTop;
+	private boolean collidedBelow;
+	private boolean collidedTheLeft;
+	private boolean collidedTheRight;
 	
 	private ArrayList<Object> collidedObj;
 	
@@ -45,6 +55,8 @@ public class PlayerObj extends Object
 		this.isDown = false;
 		this.isLeft = false;
 		this.isRight = false;
+		
+		setCollisionMovementToFalse();
 	}
 
 /**************************Paint and Draw Methods****************************/	
@@ -64,9 +76,9 @@ public class PlayerObj extends Object
 	public void update() 
 	{
 //		System.out.println("Amount of Objects at the moment: " + collidedObj.size());
+		detectingCollision();
 		movement();	
 		changeInSpeed();
-		detectingCollision();
 	}
 
 /************************Setter Methods**************************************/	
@@ -83,39 +95,52 @@ public class PlayerObj extends Object
 	
 	private void changeInSpeed()
 	{
+		xVel = Left_xVel + Right_xVel;
+		yVel = Up_yVel + Down_yVel;
+		
 		x += xVel;
 		y += yVel;
 	}
 	
 	private void movement()
 	{
-		moveUp();
-		moveRight();
-		moveLeft();
-		moveDown();
+		if(!collidedTop) { moveUp(); } else { Up_yVel = 0;}
+		if(!collidedTheRight) { moveRight(); } else { Right_xVel = 0;}
+		if(!collidedTheLeft) { moveLeft(); } else { Left_xVel = 0;}
+		if(!collidedBelow) { moveDown(); } else { Down_yVel = 0;}
 		stay();
 //		setCollisionBox();
 	}
 
-	private void moveUp() { if(isUp) yVel = -speed; }
+	private void moveUp() { if(isUp) Up_yVel = -speed; }
 	
-	private void moveDown() { if(isDown) yVel = speed; }
+	private void moveDown() { if(isDown) Down_yVel = speed; }
 	
-	private void moveLeft() { if(isLeft) xVel = -speed; }
+	private void moveLeft() { if(isLeft) Left_xVel = -speed; }
 	
-	private void moveRight() { if(isRight) xVel = speed; }
+	private void moveRight() { if(isRight) Right_xVel = speed; }
 	
 	private void stay()
 	{
-		if(!isUp && !isDown) stay_Vert();
-		if(!isLeft && !isRight) stay_Hori();
+		if(!isUp) Up_yVel = 0;
+		if(!isDown) Down_yVel = 0;
+		if(!isLeft) Left_xVel = 0;
+		if(!isRight) Right_xVel = 0;
 	}
 	
-	private void stay_Vert() { yVel = 0; }
-	
-	private void stay_Hori() { xVel = 0; }
+//	private void stay_Vert() { yVel = 0; }
+//	
+//	private void stay_Hori() { xVel = 0; }
 
 /****************************Collision Detection Related Methods***********************/
+	
+	private void setCollisionMovementToFalse() 
+	{
+		this.collidedTop = false;
+		this.collidedBelow = false;
+		this.collidedTheLeft = false;
+		this.collidedTheRight = false;
+	}
 	
 	private void C_BoxDetecting()
 	{
@@ -126,23 +151,23 @@ public class PlayerObj extends Object
 	private void detectingCollision()
 	{
 		C_BoxDetecting();
-		if(!collidedObj.isEmpty()) { collisionDetected(); }
+		setCollisionMovementToFalse();
+		if(!collidedObj.isEmpty()) collisionDetected(); 
 	}
 
 	private void collisionDetected()
 	{
 		for(Object Obj: collidedObj)
-		{
-//			System.out.println("(" + x + ", " + y + ") " + "collidedTop: " + collidedTop(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
-//			System.out.println("(" + x + ", " + y + ") " + "collidedBelow: " + collidedBelow(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
-//			System.out.println("(" + x + ", " + y + ") " + "collidedTheLeft: " + collidedTheLeft(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
-//			System.out.println("(" + x + ", " + y + ") " + "collidedTheRight: " + collidedTheRight(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
-//			System.out.println();
+		{	
+//			if(collidedTop(Obj)) System.out.println("(" + x + ", " + y + ") " + "collidedTop: " + collidedTop(Obj));
+//			if(collidedBelow(Obj)) System.out.println("(" + x + ", " + y + ") " + "collidedBelow: " + collidedBelow(Obj));
+//			if(collidedTheLeft(Obj)) System.out.println("(" + x + ", " + y + ") " + "collidedTheLeft: " + collidedTheLeft(Obj));
+//			if(collidedTheRight(Obj)) System.out.println("(" + x + ", " + y + ") " + "collidedTheRight: " + collidedTheRight(Obj));
 			
-			if(collidedTop(Obj)) System.out.println("collidedTop: " + collidedTop(Obj));
-			if(collidedBelow(Obj)) System.out.println("collidedBelow: " + collidedBelow(Obj));
-			if(collidedTheLeft(Obj)) System.out.println("collidedTheLeft: " + collidedTheLeft(Obj));
-			if(collidedTheRight(Obj)) System.out.println("collidedTheRight: " + collidedTheRight(Obj));
+			if(collidedTop(Obj)) collidedTop = true;
+			if(collidedBelow(Obj)) collidedBelow = true;
+			if(collidedTheLeft(Obj)) collidedTheLeft = true;
+			if(collidedTheRight(Obj)) collidedTheRight = true;
 		}
 		
 	}
