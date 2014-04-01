@@ -65,13 +65,15 @@ public abstract class Object extends Thread implements BoardSettings, ActionList
 	
 	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	
-	public boolean collide(Object checking) 
-	{ 
-		if(this.getC_Box().isColliding(checking.getC_Box()))
-			return true; 
-		else 
-			return false;
-	}
+	public boolean collide(Object checking) { return this.getC_Box().isCollidingWith(checking.getC_Box()); }
+	
+	public boolean collidedTop(Object that) { return this.getC_Box().isBelowOf(that.getC_Box()); }	
+	
+	public boolean collidedBelow(Object that) { return this.getC_Box().isOnTopOf(that.getC_Box()); }	
+	
+	public boolean collidedTheLeft(Object that) { return this.getC_Box().isOnTheRightOf(that.getC_Box()); }
+	
+	public boolean collidedTheRight(Object that) { return this.getC_Box().isOnTheLeftOf(that.getC_Box()); }	
 	
 /****************************Thread*****************************************/
 	

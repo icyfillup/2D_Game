@@ -19,7 +19,7 @@ public class PlayerObj extends Object
 	private boolean isLeft;
 	private boolean isRight;
 	
-	private ArrayList<Object> collidingObj;
+	private ArrayList<Object> collidedObj;
 	
 /************************Constructor*****************************************/
 	
@@ -37,7 +37,7 @@ public class PlayerObj extends Object
 		initMovement();
 	}
 	
-	private void initCollidingObj() { collidingObj = new ArrayList<Object>(); }
+	private void initCollidingObj() { collidedObj = new ArrayList<Object>(); }
 
 	private void initMovement() 
 	{
@@ -51,11 +51,10 @@ public class PlayerObj extends Object
 	
 	public void draw(Graphics g)
 	{
+		C_Box.draw(g);
 		g.setColor(Color.RED);
 		g.drawOval(x, y, width, height);
 		g.fillOval(x, y, width, height);
-		
-		C_Box.draw(g);
 	}
 
 /**************************Thread*********************************************/	
@@ -64,6 +63,7 @@ public class PlayerObj extends Object
 	
 	public void update() 
 	{
+//		System.out.println("Amount of Objects at the moment: " + collidedObj.size());
 		movement();	
 		changeInSpeed();
 		detectingCollision();
@@ -119,23 +119,35 @@ public class PlayerObj extends Object
 	
 	private void C_BoxDetecting()
 	{
-		collidingObj.clear();
-		for(groundObj Obj: getPlatform()) { if(this.collide(Obj)) collidingObj.add(Obj); }
+		collidedObj.clear();
+		for(groundObj Obj: getPlatform()) { if(this.collide(Obj)) collidedObj.add(Obj); }
 	}
 	
 	private void detectingCollision()
 	{
 		C_BoxDetecting();
-		if(!collidingObj.isEmpty()) { collisionDetected(); }
+		if(!collidedObj.isEmpty()) { collisionDetected(); }
 	}
 
 	private void collisionDetected()
 	{
+		for(Object Obj: collidedObj)
+		{
+//			System.out.println("(" + x + ", " + y + ") " + "collidedTop: " + collidedTop(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
+//			System.out.println("(" + x + ", " + y + ") " + "collidedBelow: " + collidedBelow(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
+//			System.out.println("(" + x + ", " + y + ") " + "collidedTheLeft: " + collidedTheLeft(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
+//			System.out.println("(" + x + ", " + y + ") " + "collidedTheRight: " + collidedTheRight(Obj) + " (" + Obj.x + ", " +Obj. y + ")");
+//			System.out.println();
+			
+			if(collidedTop(Obj)) System.out.println("collidedTop: " + collidedTop(Obj));
+			if(collidedBelow(Obj)) System.out.println("collidedBelow: " + collidedBelow(Obj));
+			if(collidedTheLeft(Obj)) System.out.println("collidedTheLeft: " + collidedTheLeft(Obj));
+			if(collidedTheRight(Obj)) System.out.println("collidedTheRight: " + collidedTheRight(Obj));
+		}
 		
 	}
 	
 //	private void setCollisionBox() { C_Box.setCoordinate(x, y); }
 	
-/******************************************************************************/
-	
+/******************************************************************************/	
 }

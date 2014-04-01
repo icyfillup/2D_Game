@@ -13,10 +13,10 @@ public class groundObj extends Object
 	
 	public void draw(Graphics g)
 	{
+		C_Box.draw(g);
 		g.setColor(Color.GREEN);
 		g.drawRect(x, y, width, height);
 		g.fillRect(x, y, width, height);
-		C_Box.draw(g);
 	}
 
 	@Override

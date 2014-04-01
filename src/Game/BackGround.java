@@ -56,6 +56,8 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 	{
 		platform = new ArrayList<groundObj>();
 		platform.add(new groundObj(0, GRID_SIZE * (B_ROW - 2), GRID_SIZE * 5, GRID_SIZE, this));
+		platform.add(new groundObj(0, GRID_SIZE * (B_ROW - 3), GRID_SIZE, GRID_SIZE, this));
+		platform.add(new groundObj(GRID_SIZE * (2), GRID_SIZE * (2), GRID_SIZE * 3, GRID_SIZE, this));
 	}
 
 /************************Paint and Draw Methods******************************/	
@@ -102,6 +104,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 /************************Setter Methods**************************************/	
 	
 	
+	
 /************************Collision Detection*********************************/	
 	
 	
@@ -136,7 +139,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-		System.out.print("AddNotifyExecuted!");	
+		System.out.println("AddNotifyExecuted!");	
 	}
 
 /*************************Listener*****************************************/	
