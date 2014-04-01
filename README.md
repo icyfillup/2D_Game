@@ -1,8 +1,8 @@
 # Goal
 Trying to make a 2D game
 
-X make the game functional
-X movement
-X collision detection 
-X ground 
+- X Make the functional game
+- X Movement
+- X Collision Detection 
+- X Ground 
 - add gravity
