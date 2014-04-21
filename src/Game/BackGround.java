@@ -142,6 +142,47 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 		System.out.println("AddNotifyExecuted!");	
 	}
 
+
+//public void run()
+//{ 
+//	long lastTime = System.nanoTime(); 
+//	double nsPerSec = 1000000000.0 / FPS; 
+//	int ticks = 0; int frames = 0; 
+//	long lastTimer = System.currentTimeMillis(); 
+//	double delta = 0.0; 
+//	initialize(); 
+//	 
+//	while(running) 
+//	{ 
+//		long now = System.nanoTime(); 
+//		delta += (now - lastTime)/nsPerSec; 
+//		lastTime = now; 
+//		boolean shouldRender = false; 
+//		//checks to see if images should render
+//		 
+//		while(delta >= 1) 
+//		{ 
+//			ticks++; 
+//			update(); 
+//			delta -= 1; shouldRender = true; 
+//		} 
+//		
+//		if(shouldRender) 
+//		{ 
+//			frames++; 
+//			render(); 
+//			draw(); 
+//		}
+//		
+//		if(System.currentTimeMillis() - lastTimer >= 1000) 
+//		{ 
+//			lastTimer += 1000; 
+//			//System.out.println (frames+ "..."+ ticks); 
+//			frames = 0; ticks = 0; 
+//		} 
+//	} 
+//}
+	
 /*************************Listener*****************************************/	
 	
 	@Override
@@ -194,5 +235,7 @@ public class BackGround extends JPanel implements BoardSettings, Runnable, KeyLi
 //		System.out.println("2. " + (char) key);
 		e.consume();
 	}
+	
+	
 	
 }
